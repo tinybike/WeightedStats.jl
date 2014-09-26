@@ -17,9 +17,9 @@ function weighted_median{S<:Real,T<:Real}(data::Array{S,1}, weights::Array{T,1})
         cumulative_weight = cumsum(sorted[:,2])
         below_midpoint_index = find(cumulative_weight .<= midpoint)[end]
         if cumulative_weight[below_midpoint_index] == midpoint
-             mean(sorted[below_midpoint_index:below_midpoint_index+1,1])
+            mean(sorted[below_midpoint_index:below_midpoint_index+1,1])
         else
-             sorted[below_midpoint_index+1,1]
+            sorted[below_midpoint_index+1,1]
         end
     end
 end
