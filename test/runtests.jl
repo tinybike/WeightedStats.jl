@@ -47,8 +47,6 @@ num_tests = length(data)
 @test_throws MethodError weighted_mean("string", "input")
 
 for i = 1:num_tests
-    @test isa(data[i], NumericArray)
-    @test isa(weights[i], NumericArray)
     @test approx_eq(weighted_median(data[i], weights[i]), median_answers[i], tol)
     @test approx_eq(weighted_mean(data[i], weights[i]), mean_answers[i], tol)
 end
