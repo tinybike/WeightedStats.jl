@@ -8,7 +8,7 @@ A tiny Julia package which calculates weighted medians and means.  Yep, that's i
 
 Installation:
 
-    julia> Pkg.add("WeightedStats")
+    julia> Pkg.clone("git://github.com/tensorjack/WeightedStats.jl.git")
 
 Use:
 
