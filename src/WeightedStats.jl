@@ -1,16 +1,14 @@
 module WeightedStats
 
-export weighted_mean, weighted_median, NumericArray
+export weighted_mean, weighted_median
 
-NumericArray = Union(Array{Int,1}, Array{Float32,1}, Array{Float64,1})
-
-function weighted_mean(data::NumericArray, weights::NumericArray)
+function weighted_mean{S<:Real,T<:Real}(data::Array{S,1}, weights::Array{T,1})
     data = float(data)
     weights = float(weights) / sum(weights)
     (data' * weights)[1]
 end
 
-function weighted_median(data::NumericArray, weights::NumericArray)
+function weighted_median{S<:Real,T<:Real}(data::Array{S,1}, weights::Array{T,1})
     sorted = sortrows([data weights])
     midpoint = 0.5 * sum(sorted[:,2])
     if any(weights .> midpoint)
