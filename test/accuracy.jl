@@ -59,4 +59,4 @@ end
 for i = 1:num_tests
     @assert weighted_median(data[i], weights[i]) == median_answers[i]
 end
-@assert is(weighted_median([4, 3, 2, 1], [0, 0, 0, 0]), nothing)
+@test_throws ErrorException weighted_median([4, 3, 2, 1], [0, 0, 0, 0])
