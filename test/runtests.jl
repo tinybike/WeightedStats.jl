@@ -1,4 +1,5 @@
 using WeightedStats
+using StatsBase
 using Base.Test
 
 include("accuracy.jl")
