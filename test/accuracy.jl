@@ -54,12 +54,12 @@ end
 @test isnan(weighted_mean([4, 3, 2, 1], [0, 0, 0, 0]))
 
 # Weighted median tests
-@test_throws MethodError weighted_median(data[1], verbose=false)
-@test_throws MethodError weighted_median("string", "input", verbose=false)
+@test_throws MethodError weighted_median(data[1])
+@test_throws MethodError weighted_median("string", "input")
 for i = 1:num_tests
-    @test weighted_median(data[i], weights[i], verbose=false) == median_answers[i]
+    @test weighted_median(data[i], weights[i]) == median_answers[i]
 end
-@test_throws ErrorException weighted_median([4, 3, 2, 1], [0, 0, 0, 0], verbose=false)
+@test_throws ErrorException weighted_median([4, 3, 2, 1], [0, 0, 0, 0])
 @test_throws ErrorException weighted_median((Float64)[], (Float64)[])
 v = [4, 3, 2, 1]
 wt = [1, 2, 3, 4, 5]
@@ -70,3 +70,9 @@ v = [1, 3, 2, NaN, 2]
 @test isnan(weighted_median(v, wt))
 wt = [1, 2, NaN, 4, 5]
 @test isnan(weighted_median(v, wt))
+v = [5, 4, 3, 2, 1]
+wt = [1, 2, -3, 4, -5]
+@test weighted_median(v, wt) == 2.0
+v = [-10, 1, 1, -10, -10]
+wt = [-1, -1, -1, -1, -1]
+@test weighted_median(v, wt) == -10

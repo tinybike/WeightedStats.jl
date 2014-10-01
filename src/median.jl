@@ -1,5 +1,5 @@
 function weighted_median{T<:Real,W<:Real}(data::Array{T,1}, weights::Array{W,1};
-                                          verbose::Bool=true, checknan::Bool=true)
+                                          checknan::Bool=true)
     isempty(data) && error("median of an empty array is undefined")
     if length(data) != length(weights)
         error("data and weight vectors must be the same size")
@@ -9,13 +9,10 @@ function weighted_median{T<:Real,W<:Real}(data::Array{T,1}, weights::Array{W,1};
             (isnan(x) || isnan(weights[i])) && return NaN
         end
     end
-    mask = weights .> 0
+    mask = weights .!= 0
     if any(mask)
         data = data[mask]
         weights = weights[mask]
-        if !all(mask)
-            verbose && warn(string("ignoring ", sum(~mask), " non-positive weight(s)"))
-        end
         maxval, maxind = findmax(weights)
         midpoint = 0.5 * sum(weights)
         if maxval > midpoint
